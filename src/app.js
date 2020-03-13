@@ -25,7 +25,7 @@ mongoose.connect(process.env.DATABASE_CONNECTION_STRING, {
 const db = mongoose.connection;
 
 // Load models
-//const Apisky = require('./models/apisky');
+const Apisky = require('./models/apisky');
   
 db.on('connected', () => {
     console.log('Mongoose default connection is open');
