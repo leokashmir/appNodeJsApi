@@ -123,7 +123,7 @@ exports.deleteUsuarios = (req, res) => {
 
 // CADASTRAR USUARIO
 exports.createUser = async (req, res) => {
-
+    return res.status(200).send("olaaaaaa");
  const {errors} = validationResult(req);
 
     if(errors.length > 0) {
