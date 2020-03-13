@@ -21,7 +21,7 @@ router.get("/testeGet", (req, res, next) => {
 });
 
 
-router.get("/testePost", (req, res, next) => {
+router.post("/testePost", (req, res, next) => {
     res.status(200).send({
         title: 'API POST'
     });
