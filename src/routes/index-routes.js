@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { check } = require('express-validator');
-const apiskyController = require('../controllers/apisky-Controller');
+const apiskyController = require('../controllers/apisky-controller');
 
 
 
