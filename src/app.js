@@ -24,7 +24,7 @@ mongoose.connect(process.env.DATABASE_CONNECTION_STRING,  {
 
 const db = mongoose.connection;
 
-
+if(db){console.log(db.useDb)}
 
 
 // Load models
