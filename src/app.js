@@ -1,42 +1,58 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require('body-parser');
-const app = express();
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
+const bodyParser = require('body-parser')
 
+
+// App
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-//banco na nuvem
-mongoose.connect("mongodb+srv://sky:skydesafio@cluster0-tjvtu.mongodb.net/desafiosky?retryWrites=true&w=majority", {useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: true})
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-//conexão com o banco
-let db = mongoose.connection;
+// Database
+mongoose.connect(process.env.DATABASE_CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: true,
+    useNewUrlParser: true,
+    useCreateIndex: true 
+});
 
-//mensagem de erro, caso haja
-db.on("error", console.log.bind(console, "connection error:"))
+const db = mongoose.connection;
 
-//mensagem de conexão
-db.once("open", function(){
-  console.log("Conexão feita com sucesso.")
-})
+// Load models
+//const Apisky = require('./models/apisky');
+  
+db.on('connected', () => {
+    console.log('Mongoose default connection is open');
+});
 
-//rotas
-const usuarios = require("./routes/usuarioRoutes")
+db.on('error', err => {
+    console.log(`Mongoose default connection has occured \n${err}`);
+});
 
-//acesso a api
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    )
-    next()
-  });
+db.on('disconnected', () => {
+    console.log('Mongoose default connection is disconnected');
+});
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+process.on('SIGINT', () => {
+    db.close(() => {
+        console.log(
+        'Mongoose default connection is disconnected due to application termination'
+        );
+        process.exit(0);
+    });
+});
 
-app.use('/', usuarios)
 
-module.exports = app
+
+// Load routes
+const indexRoutes = require('./routes/index-routes');
+app.use('/', indexRoutes);
+
+
+module.exports = app;
