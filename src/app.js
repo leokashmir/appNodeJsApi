@@ -22,7 +22,7 @@ mongoose.connect(process.env.DATABASE_CONNECTION_STRING,  {
     useCreateIndex: true 
 });
 
-const db = mongoose.connection;
+let db = mongoose.connection;
 
 if(db){console.log(db.useDb)}
 
