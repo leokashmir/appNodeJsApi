@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // Database
-mongoose.connect(process.env.DATABASE_CONNECTION_STRING, {
+mongoose.connect(process.env.DATABASE_CONNECTION_STRING,  {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: true,
@@ -23,6 +23,8 @@ mongoose.connect(process.env.DATABASE_CONNECTION_STRING, {
 });
 
 const db = mongoose.connection;
+
+
 
 
 // Load models

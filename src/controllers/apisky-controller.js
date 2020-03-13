@@ -21,7 +21,7 @@ exports.postAuth = async (req, res) => {
     console.log("console ====================== postAuth")
     const apisky = await ApiskyModel.find({email});
   
-  
+    console.log("console ====================== apisky" + apisky)
 // Object.keys(apisky).length pega o tamanho do array apisky
     if ( Object.keys(apisky).length == 0) {
         return res.status(401).send({ error: 'Usuario e/ou senha inválidos!' });
