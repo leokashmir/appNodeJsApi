@@ -18,7 +18,7 @@ function geraToken(id) {
 // Auth
 exports.postAuth = async (req, res) => {
     const { email, senha} = req.body;
-    
+    console.log("console ====================== postAuth")
     const apisky = await ApiskyModel.find({email});
   
   
@@ -123,7 +123,7 @@ exports.deleteUsuarios = (req, res) => {
 
 // CADASTRAR USUARIO
 exports.createUser = async (req, res) => {
-    return res.status(200).send("olaaaaaa");
+  console.log("console ====================== createuser")
  const {errors} = validationResult(req);
 
     if(errors.length > 0) {
