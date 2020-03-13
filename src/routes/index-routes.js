@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-
+const { check } = require('express-validator');
+const apiskyController = require('../controllers/apisky-Controller');
 
 
 
@@ -10,7 +11,10 @@ router.get("/", (req, res, next) => {
     });
 });
 
-
+router.post('/cadastro', [
+    check('email').isEmail(),
+    check('senha').isLength({ min: 6 }).withMessage("senha precisa ter no minimo 6 caracteres.")
+  ], apiskyController.createUser );
 
 
 module.exports = router;
