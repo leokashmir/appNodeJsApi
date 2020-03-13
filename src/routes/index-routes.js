@@ -13,6 +13,21 @@ router.get("/", (req, res, next) => {
     });
 });
 
+
+router.get("/testeGet", (req, res, next) => {
+    res.status(200).send({
+        title: 'API GET'
+    });
+});
+
+
+router.get("/testePost", (req, res, next) => {
+    res.status(200).send({
+        title: 'API POST'
+    });
+});
+
+
 router.post('/cadastro', [
     check('email').isEmail(),
     check('senha').isLength({ min: 6 }).withMessage("senha precisa ter no minimo 6 caracteres.")
