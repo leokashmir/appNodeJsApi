@@ -19,9 +19,15 @@ function geraToken(id) {
 exports.postAuth = async (req, res) => {
     const { email, senha} = req.body;
     console.log("console ====================== postAuth")
+   
+   try{
+
     const apisky = await ApiskyModel.find({email});
+
+   }catch(err){console.log(err)}
+   
   
-    console.log("console ====================== apisky" + apisky)
+   
 // Object.keys(apisky).length pega o tamanho do array apisky
     if ( Object.keys(apisky).length == 0) {
         return res.status(401).send({ error: 'Usuario e/ou senha inválidos!' });
