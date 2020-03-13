@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const app = express();
 
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 //banco na nuvem
 mongoose.connect("mongodb+srv://sky:skydesafio@cluster0-tjvtu.mongodb.net/desafiosky?retryWrites=true&w=majority", {useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: true})
 
