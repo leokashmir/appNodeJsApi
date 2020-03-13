@@ -24,6 +24,7 @@ mongoose.connect(process.env.DATABASE_CONNECTION_STRING, {
 
 const db = mongoose.connection;
 
+
 // Load models
 const Apisky = require('./models/apisky');
   
